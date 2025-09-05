@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>موقع موزّع الدواء الذكي</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div>
+          <h1>موقع موزّع الدواء الذكي</h1>
+          <p class="tagline">ابحث عن اسم الدواء لتظهر لك صورته ودواعي استعماله والأعراض الشائعة وأفضل أوقات تناوله ⏰</p>
+        </div>
+      </div>
+      <button class="pill-btn secondary" id="resetBtn" title="إظهار جميع الأدوية">إظهار الكل</button>
+    </header>
+
+    <section class="search-area" aria-label="البحث عن دواء">
+      <label class="search">
+        <span class="icon">🔎</span>
+        <input id="q" type="search" placeholder="اكتب اسم الدواء…" autocomplete="off" />
+      </label>
+      <button class="pill-btn" id="searchBtn">بحث</button>
+      <div class="chips" id="chips"></div>
+    </section>
+
+    <section id="results" class="grid" aria-live="polite" aria-busy="false"></section>
+    <div id="emptyState" class="nores" hidden>
+      لم يتم العثور على نتائج. جرّب كتابة جزء من الاسم أو اختر فئة من الأعلى.
+    </div>
+
+    <footer>
+      <div class="disclaimer">
+        <strong>تنبيه مهم:</strong> المعلومات هنا لأغراض تعليمية فقط ولا تُعدّ نصيحة طبية. استشر طبيبك أو الصيدلي قبل تناول أي دواء.
+      </div>
+      <div class="credit">© <span id="year"></span> موزّع الدواء الذكي — التصميم بالأبيض والبنفسجي 💜</div>
+      <div class="designers">المصممون: براء أبو عواد، يونس سلامين، يحيى محاريق</div>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
