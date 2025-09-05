@@ -1,29 +1,41 @@
-const meds = [
-  { name: "باراسيتامول", category: "مسكنات", indication: "خفّض الحرارة وتسكين الألم", symptoms: ["صداع","حمّى"], bestTimes: ["08:00","14:00","20:00"], img: "💊" },
-  { name: "إيبوبروفين", category: "مضادات التهاب", indication: "تخفيف الألم والالتهاب", symptoms: ["التهاب مفاصل","ألم ظهري"], bestTimes: ["09:00","21:00"], img: "💊" },
-  { name: "أموكسيسيلين", category: "مضادات حيوية", indication: "علاج الالتهابات البكتيرية", symptoms: ["التهاب حلق","التهابات صدرية"], bestTimes: ["08:00","20:00"], img: "💊" }
-];
+// قاعدة بيانات بسيطة للأدوية
+const medicines = {
+    "باراسيتامول": {
+        image: "https://upload.wikimedia.org/wikipedia/commons/1/15/Paracetamol-500mg.jpg",
+        uses: "تسكين الألم وخفض الحرارة.",
+        sideEffects: "غثيان، صداع، طفح جلدي نادر.",
+        bestTime: "يمكن تناوله مع الطعام أو بدونه."
+    },
+    "ايبوبروفين": {
+        image: "https://upload.wikimedia.org/wikipedia/commons/7/7b/Ibuprofen_400mg.jpg",
+        uses: "تخفيف الألم والالتهاب وخفض الحرارة.",
+        sideEffects: "اضطرابات معدية، دوخة، طفح جلدي.",
+        bestTime: "يفضل تناوله مع الطعام لتجنب اضطرابات المعدة."
+    },
+    "أموكسيسيلين": {
+        image: "https://upload.wikimedia.org/wikipedia/commons/6/6c/Amoxicillin_capsules.jpg",
+        uses: "مضاد حيوي لعلاج الالتهابات البكتيرية.",
+        sideEffects: "إسهال، غثيان، طفح جلدي.",
+        bestTime: "يفضل تناوله قبل أو بعد الطعام حسب توصية الطبيب."
+    }
+};
 
-const resultsEl = document.getElementById('results');
-const emptyEl = document.getElementById('emptyState');
-const qEl = document.getElementById('q');
-const chipsEl = document.getElementById('chips');
+function searchMedicine() {
+    const input = document.getElementById("medicineInput").value.trim();
+    const resultDiv = document.getElementById("result");
 
-const categories = [...new Set(meds.map(m=>m.category))];
-let activeCat = null;
-
-// إنشاء فئات الدواء
-categories.forEach(cat=>{
-  const b = document.createElement('button');
-  b.className = 'chip'; b.textContent = cat;
-  b.addEventListener('click',()=>{
-    activeCat = activeCat===cat ? null : cat;
-    [...chipsEl.children].forEach(c=>c.classList.remove('active'));
-    if(activeCat) b.classList.add('active');
-    render();
-  });
-  chipsEl.appendChild(b);
-});
-
-document.getElementById('searchBtn').addEventListener('click', render);
-document.getElementById('resetBtn').addEventListener('click', ()=>{
+    if (medicines[input]) {
+        const med = medicines[input];
+        resultDiv.innerHTML = `
+            <img src="${med.image}" alt="${input}">
+            <h2>${input}</h2>
+            <p><strong>دواعي الاستعمال:</strong> ${med.uses}</p>
+            <p><strong>الأعراض الجانبية:</strong> ${med.sideEffects}</p>
+            <p><strong>أفضل وقت لتناوله:</strong> ${med.bestTime}</p>
+        `;
+        resultDiv.style.display = "block";
+    } else {
+        resultDiv.innerHTML = `<p>عذرًا، لم يتم العثور على معلومات لهذا الدواء.</p>`;
+        resultDiv.style.display = "block";
+    }
+}
